@@ -87,7 +87,7 @@ export default function Comment({ comment, commentId, originalPostId }) {
     <div className="flex p-3 pl-20 cursor-pointer border-b border-gray-200">
       {/* image */}
       <img
-        className="h-11 w-11 mr-4  rounded-full"
+        className="h-9 w-9 mr-3  rounded-full"
         src={comment?.userImg}
         alt="user-image"
       ></img>
@@ -97,21 +97,21 @@ export default function Comment({ comment, commentId, originalPostId }) {
         <div className="flex  items-center justify-between">
           {/* user info */}
           <div className="flex items-center space-x-1 whitespace-nowrap">
-            <h4 className="font-bold text-[15px] sm:text-[16px] hover:underline ">
+            <h4 className="font-bold text-[10px] sm:text-[13px] hover:underline ">
               {comment?.name}
             </h4>
-            <span className="text-sm sm:text-[15px]">
+            <span className="text-sm sm:text-[13px]">
               @{comment?.username}-
             </span>
-            <span className="text-sm sm:text-[15px] hover:underline">
+            <span className="text-sm sm:text-[13px] hover:underline">
               <Moment fromNow>{comment?.timestamp?.toDate()}</Moment>
             </span>
           </div>
           {/* dot icon */}
-          <DotsHorizontalIcon className="h-10 hoverEffect w-10 hover:bg-sky-100 hover:text-sky-500 p-2" />
+          <DotsHorizontalIcon className="h-10 hoverEffect w-8 hover:bg-sky-100 hover:text-sky-500 p-2" />
         </div>
         {/* post text */}
-        <p className="text-gray-800 text-[15px] sm:text-[16px] mb-2">
+        <p className="text-gray-800 text-[13px] sm:text-[15px] mb-2">
           {comment?.comment}
         </p>
 
@@ -127,14 +127,14 @@ export default function Comment({ comment, commentId, originalPostId }) {
                   setOpen(!open);
                 }
               }}
-              className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"
+              className="h-8 w-8 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"
             />
           </div>
 
           {session?.user.uid === comment?.userId && (
             <TrashIcon
               onClick={deleteComment}
-              className="h-9 w-9 hoverEffect p-2 hover:text-red-400 hover:bg-red-200"
+              className="h-8 w-8 hoverEffect p-2 hover:text-red-400 hover:bg-red-200"
             />
           )}
 
@@ -142,12 +142,12 @@ export default function Comment({ comment, commentId, originalPostId }) {
             {hasLiked ? (
               <HeartIconFilled
                 onClick={likeComment}
-                className="h-9 w-9 hoverEffect p-2 text-red-600 hover:bg-red-100"
+                className="h-8 w-8 hoverEffect p-2 text-red-600 hover:bg-red-100"
               />
             ) : (
               <HeartIcon
                 onClick={likeComment}
-                className="h-9 w-9 hoverEffect p-2 hover:text-red-600 hover:bg-red-100"
+                className="h-8 w-8 hoverEffect p-2 hover:text-red-600 hover:bg-red-100"
               />
             )}
             {likes.length > 0 && (
@@ -159,8 +159,8 @@ export default function Comment({ comment, commentId, originalPostId }) {
             )}
           </div>
 
-          <ShareIcon className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
-          <ChartBarIcon className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
+          <ShareIcon className="h-8 w-8 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
+          <ChartBarIcon className="h-8 w-8 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
         </div>
       </div>
     </div>
