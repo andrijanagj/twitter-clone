@@ -6,18 +6,38 @@ import Sidebar from "../../components/sidebar";
 import Widgets from "../../components/Widgets";
 import Post from "../../components/Post";
 import { useEffect, useState } from "react";
-import { doc, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { db } from "../../firebase";
+
+import Comment from "../../components/Comment";
 
 export default function PostPage({ newsResults, randomUsersResults }) {
   const router = useRouter();
   const { id } = router.query;
   const [post, setPost] = useState();
+  const [comments, setComments] = useState([]);
 
   useEffect(
     () => onSnapshot(doc(db, "posts", id), (snapshot) => setPost(snapshot)),
     [db, id]
   );
+
+  //get comments of the post
+  useEffect(() => {
+    onSnapshot(
+      query(
+        collection(db, "posts", id, "comments"),
+        orderBy("timestamp", "desc")
+      ),
+      (snapshot) => setComments(snapshot.docs)
+    );
+  }, [db, id]);
   return (
     <div>
       <Head>
@@ -40,6 +60,17 @@ export default function PostPage({ newsResults, randomUsersResults }) {
             </h2>
           </div>
           <Post id={id} post={post} />
+          {comments.length > 0 && (
+            <div>
+              {comments.map((comment) => (
+                <Comment
+                  key={comment.id}
+                  id={comment.id}
+                  comment={comment.data()}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         {/*Widgets */}
